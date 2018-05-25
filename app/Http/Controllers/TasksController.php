@@ -35,7 +35,7 @@ class TasksController extends Controller
         ]);
         
          $task = new Task;
-         $task->title = $request->title;
+         $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
@@ -68,7 +68,7 @@ class TasksController extends Controller
         ]);
         
          $task = Task::find($id);
-         $task->title = $request->title;
+         $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
