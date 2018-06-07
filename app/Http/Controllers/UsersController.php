@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User; // add
+use App\User; 
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $$users = User::paginate(1);
+        $users = User::paginate(1);
         
         return view('users.index', [
             'users' => $users,
@@ -21,11 +21,11 @@ class UsersController extends Controller
     
     {
         $user = User::find($id);
-        $tweets = $user->tweets()->orderBy('created_at', 'desc')->paginate(10);
+        $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
         $data = [
             'user' => $user,
-            'tweets' => $tweets,
+            'tasks' => $tasks,
         ];
 
         $data += $this->counts($user);

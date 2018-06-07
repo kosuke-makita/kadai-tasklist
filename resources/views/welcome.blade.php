@@ -6,15 +6,15 @@
             <aside class="col-md-4">
             </aside>
             <div class="col-xs-8">
-                @if (count($tweets) > 0)
-                    @include('tweets.tweets', ['tweets' => $tweets])
+                @if (count($tasks) > 0)
+                    @include('tasks.tasks', ['tasks' => $tasks])
                 @endif
             </div>
         </div>
     @else
         <div class="center jumbotron">
             <div class="text-center">
-                <h1>Welcome to the Kadai Tweets</h1>
+                <h1>Welcome to the Kadai tasks</h1>
                 {!! link_to_route('signup.get', '今すぐ登録!', null, ['class' => 'btn btn-lg btn-info']) !!}
             </div>
         </div>

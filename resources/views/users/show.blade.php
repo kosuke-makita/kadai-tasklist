@@ -14,20 +14,20 @@
         </aside>
         <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">TimeLine <span class="badge">{{ $count_tweets }}</span></a></li>
+                <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">TimeLine <span class="badge">{{ $count_tasks }}</span></a></li>
                 <li><a href="#">Followings</a></li>
                 <li><a href="#">Followers</a></li>
             </ul>
             @if (Auth::user()->id == $user->id)
-                  {!! Form::open(['route' => 'tweets.store']) !!}
+                  {!! Form::open(['route' => 'tasks.store']) !!}
                       <div class="form-group">
                           {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
                           {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
                       </div>
                   {!! Form::close() !!}
             @endif
-            @if (count($tweets) > 0)
-                @include('tweets.tweets', ['tweets' => $tweets])
+            @if (count($tasks) > 0)
+                @include('tasks.tasks', ['tasks' => $tasks])
             @endif
         </div>
     </div>

@@ -17,5 +17,5 @@
 <! - Omission ->
 @endforeach
 </ul>
-{!! $ users->render() !!}
+{!! $users->render() !!}
 @endif

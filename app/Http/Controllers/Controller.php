@@ -12,10 +12,10 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
      public function counts($user) {
-        $count_tweets = $user->tweets()->count();
+        $count_tasks = $user->tasks()->count();
 
         return [
-            'count_tweets' => $count_tweets,
+            'count_tasks' => $count_tasks,
         ];
     }
 }
