@@ -15,12 +15,13 @@
         <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
                 <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">TimeLine <span class="badge">{{ $count_tasks }}</span></a></li>
-                <li><a href="#">Followings</a></li>
-                <li><a href="#">Followers</a></li>
             </ul>
             @if (Auth::user()->id == $user->id)
                   {!! Form::open(['route' => 'tasks.store']) !!}
                       <div class="form-group">
+                          <p>ステータス：</p>
+                          {!! Form::textarea('status', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
+                          <p>タスク：</p>
                           {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
                           {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
                       </div>

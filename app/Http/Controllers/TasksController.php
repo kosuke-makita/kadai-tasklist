@@ -42,6 +42,8 @@ class TasksController extends Controller
 
         $request->user()->tasks()->create([
             'content' => $request->content,
+            'status' => $request->status,
+        
         ]);
 
         return redirect('/');
@@ -49,26 +51,55 @@ class TasksController extends Controller
 
      public function show($id)
    {
-        $user = User::find($id);
-        $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
-
-        $data = [
-            'user' => $user,
-            'tasks' => $tasks,
-        ];
-
-        $data += $this->counts($user);
-
         return view('users.show', $data);
+        
+        if(\Auth::check())
+        {
+        $task = Task::find($id);
+        $user = \Auth::user();
+        $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+        
+        if (\Auth::user()->id === $task->user_id) {
+        return view('tasks.show', [
+            'tasks' => $tasks,
+            'task' => $task,
+            'user' => $user,
+        ]);
+        }
+        else{
+           return redirect('/');
+            }
+        }
+    else{
+        return view ('welcome');
     }
+        
+    }
+    
     
      public function edit($id)
     {
+        if(\Auth::check())
+        {
         $task = Task::find($id);
-
-        return view('tasks.edit', [
+        $user = \Auth::user();
+        $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+        
+        if (\Auth::user()->id === $task->user_id) {
+        return view('tasks.show', [
+            'tasks' => $tasks,
             'task' => $task,
+            'user' => $user,
         ]);
+        }
+        else{
+           return redirect('/');
+            }
+        }
+    else{
+        return view ('welcome');
+    }
+        
     }
     
      public function update(Request $request, $id)
