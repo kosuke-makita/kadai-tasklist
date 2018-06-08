@@ -51,8 +51,6 @@ class TasksController extends Controller
 
      public function show($id)
    {
-        return view('users.show', $data);
-        
         if(\Auth::check())
         {
         $task = Task::find($id);
@@ -86,7 +84,7 @@ class TasksController extends Controller
         $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
         
         if (\Auth::user()->id === $task->user_id) {
-        return view('tasks.show', [
+        return view('tasks.edit', [
             'tasks' => $tasks,
             'task' => $task,
             'user' => $user,
